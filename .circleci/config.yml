@@ -29,5 +29,5 @@ jobs:
             pip install -r optimizing_meals/requirements.txt --user  --quiet
             python -m pytest optimizing_meals/optimizing_meals.py --doctest-modules --capture=sys
             python -m pytest optimizing_meals/classes.py --doctest-modules --capture=sys
-            python -m black optimizing_meals/optimizing_meals.py --check -l 79
-            python -m black optimizing_meals/classes.py --check -l 79
+            python -m black optimizing_meals/optimizing_meals.py --check
+            python -m black optimizing_meals/classes.py --check
