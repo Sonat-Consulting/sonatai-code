@@ -1,0 +1,31 @@
+# Python CircleCI 2.0 configuration file
+version: 2
+jobs:
+  build:
+    docker:
+      # Docker container with Python installed
+      # https://circleci.com/docs/2.0/circleci-images/#python
+      - image: circleci/python:3.7
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # -------------------------------------------------------------------------------
+      - run:
+          name: install
+          command: |
+            # Install testing and linting requirements
+            pip install pytest --user --quiet
+            pip install black --user  --quiet
+            
+      # -------------------------------------------------------------------------------
+      - run:
+          name: test-optimizing-meals
+          command: |
+            pip install -r optimizing_meals/requirements.txt --user --quiet
+            python -m pytest optimizing_meals/optimizing_meals.py --doctest-modules --capture=sys
+            python -m pytest optimizing_meals/classes.py --doctest-modules --capture=sys
+            python -m black optimizing_meals/optimizing_meals.py --check
+            python -m black optimizing_meals/classes.py --check
