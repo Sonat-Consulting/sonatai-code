@@ -17,15 +17,15 @@ jobs:
           name: install
           command: |
             # Install testing and linting requirements
-            pip install pytest
-            pip install black
+            pip install pytest --user
+            pip install black --user
             
       # -------------------------------------------------------------------------------
       - run:
           name: test-optimizing-meals
           command: |
             cd optimizing_meals
-            pip install -r requirements.txt
+            pip install -r requirements.txt --user
             pytest optimizing_meals.py classes.py --doctest-modules --capture=sys
             black optimizing_meals.py --check -l 79
             cd ..
