@@ -26,5 +26,6 @@ jobs:
           command: |
             cd optimizing_meals
             pip install -r requirements.txt
-            pytest .
+            pytest optimizing_meals.py classes.py --doctest-modules --capture=sys
+            black optimizing_meals.py --check -l 79
             cd ..
