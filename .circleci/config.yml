@@ -24,6 +24,8 @@ jobs:
       - run:
           name: test-optimizing-meals
           command: |
+            pwd
+            ls
             pip install -r optimizing_meals/requirements.txt --user
             pytest optimizing_meals/optimizing_meals.py --doctest-modules --capture=sys
             pytest optimizing_meals/classes.py --doctest-modules --capture=sys
