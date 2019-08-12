@@ -1,6 +1,7 @@
-jupyter-client==5.2.4
-jupyter-core==4.4.0
-matplotlib==3.0.3
-numpy==1.16.3
-numpydoc==0.9.1
-pandas==0.24.2
+jupyter-client>=5.2.4
+jupyter-core>=4.4.0
+matplotlib>=3.0.3
+numpy>=1.16.3
+numpydoc>=0.9.1
+pandas>=0.24.2
+ortools>=7.2.6977
