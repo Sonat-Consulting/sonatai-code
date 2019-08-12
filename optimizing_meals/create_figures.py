@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# # Create figures
+# 
+# This notebook creates figures used in the article on meal optimization.
+
 # ## Imports and settings
 
 # In[1]:

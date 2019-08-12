@@ -355,10 +355,10 @@ def test_several_days():
     # Convert the dictionary values to a list of Meal objects
     meal_list = list(meals.values())
 
-    # 'mixed nuts', '1 yoghurt med musli', 'kylling i sursøt', 'burger, skive', 'sjokolade', 'egg'
+    # The limits correspond to the foods in the list above.
     meals_limits = [
-        (1, None),  # 'mixed nuts' At least once
-        (None, 1),  # '1 yoghurt med musli' At most once
+        (1, None),  # At least once
+        (None, 1),  # At most once
         (2, 3),  # Two or three times
         (None, None),
         (None, None),
