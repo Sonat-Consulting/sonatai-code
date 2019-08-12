@@ -17,8 +17,8 @@ jobs:
           name: install
           command: |
             # Install testing and linting requirements
-            pip install pytest --user
-            pip install black --user
+            pip install pytest --user --quiet
+            pip install black --user  --quiet
             
       # -------------------------------------------------------------------------------
       - run:
@@ -26,8 +26,8 @@ jobs:
           command: |
             pwd
             ls
-            pip install -r optimizing_meals/requirements.txt --user
-            pytest optimizing_meals/optimizing_meals.py --doctest-modules --capture=sys
-            pytest optimizing_meals/classes.py --doctest-modules --capture=sys
-            black optimizing_meals/optimizing_meals.py --check -l 79
-            black optimizing_meals/classes.py --check -l 79
+            pip install -r optimizing_meals/requirements.txt --user  --quiet
+            python -m pytest optimizing_meals/optimizing_meals.py --doctest-modules --capture=sys
+            python -m pytest optimizing_meals/classes.py --doctest-modules --capture=sys
+            python -m black optimizing_meals/optimizing_meals.py --check -l 79
+            python -m black optimizing_meals/classes.py --check -l 79
