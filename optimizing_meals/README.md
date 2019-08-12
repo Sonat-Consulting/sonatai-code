@@ -1,5 +1,7 @@
 # Optimizing meals
 
+[![CircleCI](https://circleci.com/gh/Sonat-Consulting/sonatai-code/tree/master.svg?style=svg)](https://circleci.com/gh/Sonat-Consulting/sonatai-code/tree/master)
+
 This folder contains an implementation of the optimization model presented in the blogpost about optimizing meals.
 
 ## How to run the code
