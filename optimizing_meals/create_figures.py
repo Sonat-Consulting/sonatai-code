@@ -38,9 +38,54 @@ if not os.path.exists("figures"):
     os.makedirs("figures")
 
 
-# ## Functions
+# ## Create plot showing goal programming
 
 # In[4]:
+
+
+x = np.linspace(0, 15)
+COLORS = plt.rcParams['axes.prop_cycle'].by_key()['color']
+
+
+plt.figure(figsize=FIGSIZE)
+
+plt.subplot(1, 2, 1)
+plt.title("Indiviual terms in the cost function")
+
+plt.plot(x, x, label="x")
+cost1 = 2 * np.maximum(0, x - 5)
+cost2 = 4 * np.maximum(0, 10 - x)
+plt.plot(x, cost1, label="$2 \delta_1^-$")
+plt.plot(x, cost2, label="$4 \delta_2^+$")
+plt.grid(True, ls="--", alpha=0.5, zorder=5)
+plt.legend()
+
+# -----------------------------------------
+
+plt.subplot(1, 2, 2)
+plt.title("Terms in the cost function and their sum")
+
+plt.plot(x, x, label="x")
+plt.plot(x, cost1, label="$2 \delta_1^-$")
+plt.plot(x, cost2, label="$4 \delta_2^+$")
+plt.scatter([10], [20], color=COLORS[3], label="Minimum", s=50)
+
+plt.plot(x, x + cost1 + cost2, label="Cost function")
+plt.grid(True, ls="--", alpha=0.5, zorder=5)
+plt.legend(loc="lower left", bbox_to_anchor=(1.0, 0.4, 0.9, 0.0))
+
+plt.tight_layout()
+filename="goal_programming"
+if filename:
+    plt.savefig(os.path.join("figures", f"{filename}.pdf"))
+    plt.savefig(os.path.join("figures", f"{filename}.png"), dpi=300)
+
+plt.show()
+
+
+# ## Functions
+
+# In[5]:
 
 
 def plot_results(x, meals, results_data, filename=None):
@@ -117,13 +162,13 @@ def plot_results(x, meals, results_data, filename=None):
 
 # ## Data
 
-# In[5]:
+# In[6]:
 
 
 from data import meals
 
 
-# In[6]:
+# In[7]:
 
 
 dietary_constraints = {"kcal": (1800, 1800), "protein": (100, None), "fat": (65 , None)}
@@ -132,7 +177,7 @@ meals = list(meals.values())
 
 # ## Prin the meals to a markdown table
 
-# In[7]:
+# In[8]:
 
 
 print(' | '.join(["Name", "Discrete", "Grams per base meal", "Description"]))
@@ -145,13 +190,13 @@ for meal in meals:
 
 # ## Example - constraint on nutrition only
 
-# In[8]:
+# In[9]:
 
 
 dietary_constraints = {"kcal": (1800, 1800), "protein": (100, None), "fat": (60 , None)}
 
 
-# In[9]:
+# In[10]:
 
 
 params = {"num_days":1, 
@@ -174,7 +219,7 @@ plot_results(x, meals, results_data, "single_day_constrained_nutrients")
 
 #  ## Example - nutrient constraints and price constraint
 
-# In[10]:
+# In[11]:
 
 
 params = {"num_days":1, 
@@ -197,7 +242,7 @@ plot_results(x, meals, results_data, "single_day_constrained_nutrients_price")
 
 # ## Example - nutrient constraints and price constraint and range constraint
 
-# In[11]:
+# In[12]:
 
 
 params = {"num_days":1, 
@@ -205,7 +250,7 @@ params = {"num_days":1,
 
           "weight_price":0.1,
           "weight_nutrients":2.0,
-          "weight_range":0.1,
+          "weight_range":0.20,
           "epsilon": 0.1
           }
 
@@ -218,9 +263,9 @@ print(results_data)
 plot_results(x, meals, results_data, "single_day_constrained_nutrients_price_range")
 
 
-# ## Example - serveral days
+# ## Example - several days
 
-# In[12]:
+# In[13]:
 
 
 num_days = 8
@@ -238,7 +283,7 @@ params = {"num_days": num_days,
 meals_limits = [(None, i+2) for i in range(len(meals))]
 
 
-# In[13]:
+# In[14]:
 
 
 # Running the cell block once gives: RuntimeError: Infeasible problem.
@@ -250,13 +295,13 @@ x, results_data = optimize_mealplan(meals=meals,
                   params=params)
 
 
-# In[14]:
+# In[15]:
 
 
 results_data
 
 
-# In[15]:
+# In[16]:
 
 
 def get_kcals(x, meals):
@@ -272,13 +317,13 @@ def get_kcals(x, meals):
         yield int(round(sum(calories)))
 
 
-# In[16]:
+# In[17]:
 
 
 meals
 
 
-# In[17]:
+# In[18]:
 
 
 # Get calories for each day
@@ -322,7 +367,7 @@ plt.savefig(os.path.join("figures", f"{filename}.png"), dpi=300)
 plt.show()
 
 
-# In[18]:
+# In[19]:
 
 
 print_results(x, meals, results_data)
